@@ -4,6 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver.maximize_window()
 
 driver.get('http://uitestingplayground.com/textinput')
 driver.find_element(By.CSS_SELECTOR, 'input#newButtonName').send_keys('SkyPro')
