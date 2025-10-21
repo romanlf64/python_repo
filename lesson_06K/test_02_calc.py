@@ -26,7 +26,7 @@ def test_calculator():
     driver.find_element(By.XPATH, '//span[text()="="]').click()
 
 # задаём явное ожидание
-    waiter = WebDriverWait(driver, 50)
+    waiter = WebDriverWait(driver, 46)
     waiter.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '.screen'), '15'))
 
 # проверяем, что в окне через 45 секунд отобразится число 15

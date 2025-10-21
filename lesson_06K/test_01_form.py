@@ -18,7 +18,6 @@ def test_form_validation():
     driver.find_element(By.CSS_SELECTOR, '[name="first-name"]').send_keys('Иван')
     driver.find_element(By.CSS_SELECTOR, '[name="last-name"]').send_keys('Петров')
     driver.find_element(By.CSS_SELECTOR, '[name="address"]').send_keys('Ленина, 55-3')
-    driver.find_element(By.CSS_SELECTOR, '[name="zip-code"]')
     driver.find_element(By.CSS_SELECTOR, '[name="city"]').send_keys('Москва')
     driver.find_element(By.CSS_SELECTOR, '[name="country"]').send_keys('Россия')
     driver.find_element(By.CSS_SELECTOR, '[name="e-mail"]').send_keys('test@skypro.com')

@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.fixture()
@@ -28,9 +30,17 @@ def test_shop_labs(driver):
     driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-backpack').click()
     driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-bolt-t-shirt').click()
     driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-onesie').click()
-# переходим в корзину
+# переходим в корзину, предварительно задав явное ожидание
+    waiter = WebDriverWait(driver, 5)
+    waiter.until(
+        EC.text_to_be_present_in_element((By.CSS_SELECTOR, 'span.shopping_cart_badge'), '3')
+    )
     driver.find_element(By.CSS_SELECTOR, 'a.shopping_cart_link').click()
-# нажимаем Checkout
+# нажимаем Checkout, предварительно задав явное ожидание
+    waiter = WebDriverWait(driver, 5)
+    waiter.until(
+        EC.text_to_be_present_in_element((By.CSS_SELECTOR, 'button#checkout'), 'Checkout')
+    )
     driver.find_element(By.CSS_SELECTOR, '#checkout').click()
 # заполняем форму своими данными
     first_name = driver.find_element(By.CSS_SELECTOR, '#first-name')
