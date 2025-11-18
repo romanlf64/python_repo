@@ -21,7 +21,7 @@ class SubjectTable:
         connection.execute(sql, {"new_name": subject_title, "id": subject_id})
         transaction.commit()
         connection.close()
-
+        
 
     def delete(self, subject_id):
         connection = self.db.connect()
@@ -34,9 +34,18 @@ class SubjectTable:
 
     def get_max_id(self):
         connection = self.db.connect()
-        sql = text("SELECT MAX (subject_id) FROM subject")
+        sql = text("SELECT MAX(subject_id) FROM subject")
         result = connection.execute(sql)
         max_id = result.scalar()
         connection.close()
         return max_id
+    
+
+    def select(self, subject_id):
+        connection = self.db.connect()
+        sql = text('SELECT * FROM subject WHERE subject_id = :id')
+        result = connection.execute(sql, {"id": subject_id})
+        row = result.mappings().all()
+        connection.close()
+        return row
         
